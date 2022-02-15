@@ -7,6 +7,13 @@ public class Book {
     public Book() {
     }
 
+    public Book(String bookCode, String name, double price, String author) {
+        this.bookCode = bookCode;
+        this.name = name;
+        this.price = price;
+        this.author = author;
+    }
+
     public String getBookCode() {
         return bookCode;
     }
