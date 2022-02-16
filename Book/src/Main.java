@@ -18,9 +18,6 @@ public class Main {
         Book[] listBooks = {pb1, pb2, pb3, pb4, pb5, fb1, fb2, fb3, fb4, fb5};
 
         getSumPrice(listBooks);
-        countLanguage(listBooks);
-        coutCategory(listBooks);
-        countFictionPrice(listBooks);
 
         Scanner input=new Scanner(System.in);
         System.out.println("Nhập tên sách: ");
@@ -35,6 +32,21 @@ public class Main {
             }
         }
 
+        Scanner inputLanguage = new Scanner(System.in);
+        System.out.println("Nhập ngôn ngữ muốn tìm: ");
+        String nameLanguage = inputLanguage.nextLine();
+        countByLanguage(listBooks,nameLanguage);
+
+        Scanner inputCategory = new Scanner(System.in);
+        System.out.println("Nhập thể loại muốn tìm: ");
+        String nameCategory = inputCategory.nextLine();
+        coutByCategory(listBooks,nameCategory);
+
+        Scanner inputFictionPrice =new Scanner(System.in);
+        System.out.println("Nhập giá muốn tìm kiếm: ");
+        double price=inputFictionPrice.nextDouble();
+        countByFictionPrice(listBooks,price);
+
     }
     public static int getSumPrice(Book[] books){
         int sum=0;
@@ -44,45 +56,46 @@ public class Main {
         System.out.println("Tổng giá 10 cuốn sách là: " +sum);
         return sum;
     }
-    public static int countLanguage(Book[] books){
-        int cnt=0;
-        for (Book a:books
+    public static int countByLanguage(Book[] books, String language){
+        int count=0;
+        for (Book b:books
              ) {
-            if (a instanceof ProgrammingBook){
-                if (((ProgrammingBook) a).getLanguage()=="Java"){
-                    cnt++;
+            if (b instanceof ProgrammingBook){
+                String check = ((ProgrammingBook) b).getLanguage();
+                if (check.equals(language)){
+                    count++;
                 }
             }
         }
-        System.out.println("Số sách Programing có language Java là: "+cnt);
-        return cnt;
+        System.out.println("Số sách Programing có language "+language+" là: "+count);
+        return count;
     }
-    public static int coutCategory(Book[] books){
-        int cnt1=0;
+    public static int coutByCategory(Book[] books,String category){
+        int count=0;
         for (Book b:books
              ) {
             if (b instanceof  FictionBook){
-                if (((FictionBook) b).getCategory()=="vien tuong 1"){
-                    cnt1++;
+                String check = ((FictionBook) b).getCategory();
+                if (check.equals(category)){
+                    count++;
                 }
             }
         }
-        System.out.println("Số cuốn sách Fiction có thể loại viễn tưởng là: " +cnt1);
-        return cnt1;
+        System.out.println("Số cuốn sách Fiction có thể loại "+category+" là: " +count);
+        return count;
     }
-    public static int countFictionPrice(Book[] books){
-        int cnt2=0;
-        for (Book c:books
+    public static int countByFictionPrice(Book[] books,double price){
+        int count=0;
+        for (Book b:books
              ) {
-            if (c instanceof FictionBook){
-                if (c.getPrice()<100){
-                    cnt2++;
+            if (b instanceof FictionBook){
+                if (b.getPrice()<price){
+                    count++;
                 }
             }
         }
-        System.out.println("Số cuốn sách Fiction có giá nhỏ hơn 100 là: "+cnt2);
-        return cnt2;
+        System.out.println("Số cuốn sách Fiction có giá nhỏ hơn "+price+" là: "+count);
+        return count;
     }
-
 }
 
